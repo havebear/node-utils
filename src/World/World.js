@@ -34,6 +34,8 @@ class World {
         cube.add(cube2)
         cube2.position.set(2, 0, 0)
         cube3.position.set(4, 0, 0)
+        cube2.material.map = new THREE.TextureLoader().load('https://threejsfundamentals.org/threejs/resources/images/wall.jpg')
+        cube3.material.map = new THREE.TextureLoader().load('../../assets/textures/test.png')
         cube2.scale.set(0.5, 0.5, 0.5)
         cube3.scale.set(0.25, 0.25, 0.25)
 
