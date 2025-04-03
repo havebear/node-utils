@@ -25,6 +25,14 @@ class World {
         container.append(renderer.domElement);
 
         const cube = createCube();
+        const cube2 = createCube();
+        const cube3 = createCube();
+        cube2.add(cube3)
+        cube.add(cube2)
+        cube2.position.set(2, 0, 0)
+        cube3.position.set(4, 0, 0)
+        cube2.scale.set(0.5, 0.5, 0.5)
+        cube3.scale.set(0.25, 0.25, 0.25)
         const light = createLights();
         // 可以添加任意数量的对象，用逗号分隔
         scene.add(cube, light);
