@@ -5,6 +5,7 @@ import { createScene } from './components/scene.js';
 
 import { createRenderer } from './systems/renderer.js';
 import { Resizer } from './systems/Resizer.js';
+import { Loop } from './systems/Loop.js';
 
 /**
  * 通过在 模块作用域内声明变量来创建类似于私有变量的东西
@@ -16,12 +17,14 @@ import { Resizer } from './systems/Resizer.js';
 let camera;
 let renderer;
 let scene;
+let loop;
 
 class World {
     constructor (container) {
         camera = createCamera();
         scene = createScene();
         renderer = createRenderer();
+        loop = new Loop(camera, scene, renderer);
         container.append(renderer.domElement);
 
         const cube = createCube();
@@ -33,7 +36,11 @@ class World {
         cube3.position.set(4, 0, 0)
         cube2.scale.set(0.5, 0.5, 0.5)
         cube3.scale.set(0.25, 0.25, 0.25)
+
         const light = createLights();
+
+        loop.updatables.push(cube, cube2, cube3); // 添加需要更新的对象到循环中
+
         // 可以添加任意数量的对象，用逗号分隔
         scene.add(cube, light);
         // 通过创建一个 Resizer 实例来实现窗口大小变化时，canvas 大小也跟着变化
@@ -42,6 +49,14 @@ class World {
 
     render () {
         renderer.render(scene, camera);
+    }
+
+    start () {
+        loop.start();
+    }
+
+    stop () {
+        loop.stop();
     }
 }
 
