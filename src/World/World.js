@@ -1,5 +1,6 @@
 import { createCamera } from './components/camera.js';
 import { createCube } from './components/cube.js';
+import { createLights } from './components/lights.js'
 import { createScene } from './components/scene.js';
 
 import { createRenderer } from './systems/renderer.js';
@@ -24,7 +25,9 @@ class World {
         container.append(renderer.domElement);
 
         const cube = createCube();
-        scene.add(cube);
+        const light = createLights();
+        // 可以添加任意数量的对象，用逗号分隔
+        scene.add(cube, light);
         // 通过创建一个 Resizer 实例来实现窗口大小变化时，canvas 大小也跟着变化
         const resizer = new Resizer(container, camera, renderer);
     }
